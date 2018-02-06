@@ -1,0 +1,11 @@
+commit 9c9d672904ca5fa341a3cd2ff9c485adac78808f (HEAD -> master)
+Author: Sliunkova Valeriya <valerijaslu@gmail.com>
+Date:   Tue Feb 6 09:40:12 2018 +0300
+
+    add Task1/status.txt
+
+commit a0c1289a423fc1e93f6027b9ab4336b8d0e4c3db
+Author: Sliunkova Valeriya <valerijaslu@gmail.com>
+Date:   Tue Feb 6 09:32:04 2018 +0300
+
+    add.gitignore
