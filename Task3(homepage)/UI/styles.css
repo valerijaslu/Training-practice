@@ -10,7 +10,7 @@ header{
 h1{
     height: 30%;
     max-width: 100%;
-    font-size: 330%;
+    font-size: 4vw;
     position: relative;
     margin: 8%;
 }
@@ -18,16 +18,17 @@ h1{
 h3{
     white-space: nowrap;
     margin: 5%;
-    font-size: 150%;
+    font-size: 2vw;
 }
 
 h5{
     padding: 0;
     margin: 0;
+font-size: 1vw;
 }
 
 p{
-    font-size: 90%;
+    font-size: 1vw;
 }
 
 footer{
@@ -86,7 +87,7 @@ body{
     white-space: nowrap;
     margin: 4%;
     height: 100%;
-    font-size: 150%;
+    font-size: 2vw;
     font-weight: bold;
 }
 .whiteButton:hover{
@@ -102,7 +103,7 @@ body{
     white-space: nowrap;
     margin: 4%;
     height: 100%;
-    font-size: 150%;
+    font-size: 2vw;
     font-weight: bold;
 }
 .blackButton:hover{
@@ -118,7 +119,7 @@ body{
 
 #loadMore.blackButton{
     padding: 0.5% 4%;
-    font-size: 180%;
+    font-size: 2.5vw%;
     font-weight: normal;
 }
 
@@ -160,7 +161,7 @@ body{
     border-width: thin;
     white-space: nowrap;
     height: 100%;
-    font-size: 120%;
+    font-size: 1.2vw;
     padding: 0.5% 1%;
     width: 17%;
 }
@@ -201,7 +202,7 @@ li {
 }
 
 .iconsOfThePost {
-    margin: 0 3%;
+    margin: 0 1%;
 }
 
 .iconButton {
@@ -210,9 +211,10 @@ li {
     border-style: solid;
     border-width: thin;
     white-space: nowrap;
-    margin: 2%;
+    margin: 2% 0;
     height: 100%;
     font-weight: bold;
+font-size: 1vw;
 }
 .iconButton:hover{
     border-color: black;
