@@ -1,5 +1,5 @@
 header{
-    margin: 1% 2% 2% 3%;
+    margin: 1% 2% 2% 2%;
     height: 10%;
     display: flex;
     max-width: 100%;
@@ -24,11 +24,11 @@ h3{
 h5{
     padding: 0;
     margin: 0;
-font-size: 1vw;
+    font-size: 1vw;
 }
 
 p{
-    font-size: 1vw;
+    font-size: 1.2vw;
 }
 
 footer{
@@ -64,7 +64,7 @@ body{
 
 .user {
     margin-top: 2%;
-    width: 72%;
+    width: 70%;
     float: right;
     display: inline-block;
 }
@@ -119,7 +119,7 @@ body{
 
 #loadMore.blackButton{
     padding: 0.5% 4%;
-    font-size: 2.5vw%;
+    font-size: 2.5vw;
     font-weight: normal;
 }
 
@@ -150,7 +150,6 @@ body{
     display: flex;
     max-width: 100%;
     margin: 0 5%;
-
 }
 
 .filterField {
@@ -195,10 +194,9 @@ li {
 }
 
 .photo {
-    width: 95%;
+    width: 100%;
     height: auto;
     vertical-align: bottom;
-
 }
 
 .iconsOfThePost {
@@ -211,11 +209,10 @@ li {
     border-style: solid;
     border-width: thin;
     white-space: nowrap;
-    margin: 0 0.5vw;
+    margin: 0.5vw 1vw;
     height: 100%;
     font-weight: bold;
-padding: 0;
-font-size: 1vw;
+    font-size: 1.2vw;
 }
 .iconButton:hover{
     border-color: black;
@@ -231,8 +228,8 @@ font-size: 1vw;
     border-style: solid;
     padding: 1% 3%;
     float: left;
-    width: 90%;
-    margin: 1% 2%;
+    width: 93.8%;
+    margin: 1% 0.3%;
     display: none;
 }
 
@@ -275,3 +272,132 @@ font-size: 1vw;
     margin: 0;
 }
 
+@media screen and (max-width: 960px) {
+    .post {
+        width: 45%;
+        margin: 3% 1%;
+    }
+
+    p{
+        font-size: 2vw;
+    }
+
+    h3{
+        font-size: 3vw;
+    }
+
+    h5{
+        font-size: 1.2vw;
+    }
+
+    .whiteButton{
+        font-size: 3vw;
+    }
+
+    .user{
+        margin-top: 1%;
+        margin-right: 2%;
+    }
+
+    #filter.blackButton{
+        font-size: 3vw;
+    }
+
+    .filterField{
+        font-size: 2vw;
+        width: 28%;
+    }
+
+    .iconButton{
+        font-size: 2vw;
+        padding: 0.5vw 2vw;
+    }
+
+    #loadMore.blackButton{
+        font-size: 4vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .post {
+        width: 90%;
+        margin: 3% auto;
+    }
+
+    p{
+        font-size: 3vw;
+    }
+
+    h1{
+        font-size: 0;
+    }
+
+    h3{
+        font-size: 4vw;
+    }
+
+    h5{
+        font-size: 1.8vw;
+    }
+
+    .whiteButton{
+        font-size: 4vw;
+    }
+
+    .logo{
+        width: 20%;
+    }
+
+    .logoImg{
+        width: 80%;
+    }
+
+    .user{
+        margin-top: 3%;
+        margin-right: 2%;
+        width: 65%;
+    }
+
+    #filter.blackButton{
+        font-size: 4vw;
+    }
+
+    .lotusInfo{
+        display: block;
+        margin: auto;
+    }
+
+    .lotusPhrase{
+        width: 100%;
+        text-align: center;
+        float: none;
+        margin: auto;
+    }
+
+    .filterButton{
+        width: 100%;;
+        margin: auto;
+        float: none;
+        text-align: center;
+    }
+
+    .filters{
+        display: block;
+    }
+
+    .filterField{
+        font-size: 3vw;
+        width: 90%;
+        margin: 3% 2%;
+        border-width: thin;
+    }
+
+    .iconButton{
+        font-size: 4vw;
+        padding: 1vw 3vw;
+    }
+
+    #loadMore.blackButton{
+        font-size: 7vw;
+    }
+}
