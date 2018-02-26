@@ -7,6 +7,11 @@ header{
     box-sizing: border-box;
 }
 
+figure{
+    margin: 0;
+    padding: 0;
+}
+
 h1{
     height: 30%;
     max-width: 100%;
@@ -328,8 +333,8 @@ li {
         font-size: 3vw;
     }
 
-    h1{
-        font-size: 0;
+    #invisible {
+        display: none;
     }
 
     h3{
@@ -401,3 +406,4 @@ li {
         font-size: 7vw;
     }
 }
+
