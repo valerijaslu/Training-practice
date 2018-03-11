@@ -295,26 +295,19 @@
         return false;
     }
 
-    function isCommonHashTags(object, array) {
-        var flag = true;
-        for(var k = 0; k < array.length; k++){
-            if(object.hashTags.indexOf(array[k]) === -1){
-                flag = false;
-            }
-        }
-        return flag;
-    }
-
     //get posts
     function getPhotoPosts(skip, top, filterConfig) {
         var toShow = photoPosts.filter(function (x) { return x.state !== 'deleted'; });
 
-        if(arguments.length === 2){
+        skip = (typeof skip !== 'undefined') ?  skip : 0;
+        top = (typeof top !== 'undefined') ?  top : 10;
+
+        if(!filterConfig){
             toShow.sort(compareTo);
             return toShow.slice(skip, skip + top);
         }
 
-        if(arguments.length === 3){
+        if(filterConfig){
             if(filterConfig.author){
                 toShow = toShow.filter(function (x) { return x.author === filterConfig.author; });
             }
@@ -347,6 +340,8 @@
 }());
 
 //tests
+console.log('default view');
+console.log(module.getPhotoPosts());
 
 console.log('show first 5 posts with author Alex and date 2019-03-01T17:30:00');
 console.log(module.getPhotoPosts(0,5, {author:'Alex', createdAt:new Date('2019-03-01T17:30:00')}));
