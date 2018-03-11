@@ -252,8 +252,10 @@
     function removePhotoPost(postID) {
         for (var i = 0; i < photoPosts.length; i++) {
             if(photoPosts[i].id === postID){
-                photoPosts[i].state = 'deleted';
-                return true;
+                if(photoPosts[i].state === 'active') {
+                    photoPosts[i].state = 'deleted';
+                    return true;
+                }
             }
         }
         return false;
@@ -286,10 +288,8 @@
     //edit post
     function editPhotoPost(postID, object) {
         var post = getPhotoPost(postID);
-        if(post != null){
+        if(post != null && post.state === 'active'){
             Object.assign(post, object);
-            removePhotoPost(postID);
-            addPhotoPost(post);
             return true;
         }
         return false;
@@ -330,6 +330,7 @@
     }
 
     return {
+        photoPosts: photoPosts,
         getPhotoPosts: getPhotoPosts,
         getPhotoPost: getPhotoPost,
         validatePhotoPost: validatePhotoPost,
@@ -390,6 +391,9 @@ console.log('try to edit post with id=21');
 console.log(module.editPhotoPost('21', {photoLink:'images/photo3.jpeg'}));
 
 console.log(module.getPhotoPost('21'));
+
+console.log('try to remove post with id=21');
+console.log(module.removePhotoPost('21'));
 
 console.log('try to remove post with id=21');
 console.log(module.removePhotoPost('21'));

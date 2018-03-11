@@ -1,85 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-    <script src="source.js"></script>
-    <meta charset="UTF-8">
-    <meta name="description" content="Photo sharing network">
-    <meta name="keywords" content="Photo,people,create">
-    <meta name="author" content="Sliunkova Valeriya">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="Task3(homepage page-making)/homepage.css" rel="stylesheet" type="text/css" />
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <title>LOTUS</title>
-</head>
-<body>
-<header>
-    <div class="logo">
-        <img class="logoImg" src="image/logo.jpg"/>
-        <h1 id="invisible">LOTUS</h1>
-    </div>
-    <div class="user">
-        <div class="userInfo">
-            <h3>User name</h3>
-            <nav class="navigation">
-                <button class="whiteButton">LOG OFF</button>
-                <button class="whiteButton">+</button>
-            </nav>
-        </div>
-    </div>
-</header>
+    <head>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
-<div class="body">
-    <div class="lotusInfo">
-        <div class="lotusPhrase">
-            <h3>LOTUS - all the splendor in the moment...</h3>
-        </div>
-        <div class="filterButton">
-            <button class="blackButton" id="filter">Filter</button>
-        </div>
-    </div>
+        <meta charset="UTF-8">
+        <meta name="description" content="Photo sharing network">
+        <meta name="keywords" content="Photo,people,create">
+        <meta name="author" content="Sliunkova Valeriya">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script defer src="source.js"></script>
+        <script defer src="workWithDOM.js"></script>
+        <title>LOTUS</title>
+    </head>
 
-    <section class="filters">
-        <input type="text" placeholder="Name" class="filterField">
-        <input type=datetime-local placeholder="dd.mm.yy hh:mm" class="filterField">
-        <input list="hashtags" placeholder="#" class="filterField">
-        <datalist id="hashtags">
-            <option value="#summer">#summer</option>
-            <option value="#people">#people</option>
-            <option value="#barcelona">#barcelona</option>
-            <option value="#magic">#magic</option>
-            <option value="#beach">#beach</option>
-            <option value="#style">#style</option>
-        </datalist>
-    </section>
+    <body>
+        <header>
+            <div class="logo">
+                <img class="logoImg" src="image/logo.jpg"/>
+                <h1 id="invisible">LOTUS</h1>
+            </div>
+            <div class="user">
+                <div class="userInfo">
+                    <h3>User name</h3>
+                    <nav class="navigation">
+                        <button class="whiteButton">LOG OUT</button>
+                        <button class="whiteButton">+</button>
+                    </nav>
+                </div>
+            </div>
+        </header>
 
-    <main>
-        <ul class="feed">
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo1.jpg"/>
-                    </div>
-                    <div class="iconsOfThePost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                    </div>
-                    <div class="descrOfPost" >
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
-            <li class="post">
+        <div class="body">
+            <div class="lotusInfo">
+                <div class="lotusPhrase">
+                    <h3>LOTUS - all the splendor in the moment...</h3>
+                </div>
+                <div class="filterButton">
+                    <button class="blackButton" id="filter">Filter</button>
+                </div>
+            </div>
+
+            <section class="filters">
+                <input type="text" placeholder="Name" class="filterField">
+                <input type=datetime-local placeholder="dd.mm.yy hh:mm" class="filterField">
+                <input list="hashtags" placeholder="#" class="filterField">
+                <datalist id="hashtags">
+                    <option value="#summer">#summer</option>
+                    <option value="#people">#people</option>
+                    <option value="#barcelona">#barcelona</option>
+                    <option value="#magic">#magic</option>
+                    <option value="#beach">#beach</option>
+                    <option value="#style">#style</option>
+                </datalist>
+            </section>
+
+            <main>
+                <ul class="feed" id = "posts">
+
+                </ul>
+            </main>
+            <div class="morePosts">
+                <button class="blackButton" id="loadMore">LOAD MORE</button>
+            </div>
+        </div>
+
+        <footer>
+            <ul class="pageInfo">
+                <li class="info">
+                    <h5>Sliunkova Valeriya</h5>
+                    <h5>Course 2 Group 2</h5>
+                </li>
+                <li class="info">
+                    <h5>valerijaslu@gmail.com</h5>
+                    <h5>16.02.2018</h5>
+                </li>
+                <li class="info">
+                    <h5>LOTUS</h5>
+                </li>
+            </ul>
+        </footer>
+        <ul style="display: none">
+            <li class="post" style="display: none" id="template">
                 <article>
                     <div class="photoOfPost">
                         <img class="photo" src="image/photo2.jpg"/>
@@ -87,8 +90,8 @@
                     <div class="iconsOfThePost">
                         <button class="iconButton"><i class="far fa-heart"></i></button>
                         <button class="iconButton"><i class="fas fa-angle-up fa-lg"></i></button>
-                        <button class="iconButton"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="iconButton"><i class="fas fa-trash"></i></button>
+                        <button style="display: none" class="iconButton"><i class="fas fa-pencil-alt"></i></button>
+                        <button style="display: none" class="iconButton"><i class="fas fa-trash"></i></button>
                     </div>
                     <div class="descrOfPost" id="visible">
                         <div class="likes">
@@ -104,221 +107,6 @@
                     </div>
                 </article>
             </li>
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo3.jpeg"/>
-                    </div>
-                    <div class="iconsOfThePost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                    </div>
-                    <div class="descrOfPost">
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .
-                            <br>
-                            more description. . .
-                            <br>
-                            and more. . .
-                        </p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo4.jpg"/>
-                    </div>
-                    <div class="iconsOfThePost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                    </div>
-                    <div class="descrOfPost">
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo5.jpg"/>
-                    </div>
-                    <div class="iconsOfYourPost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                        <button class="iconButton"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="iconButton"><i class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="descrOfPost">
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo6.jpg"/>
-                    </div>
-                    <div class="iconsOfThePost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                    </div>
-                    <div class="descrOfPost">
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo7.jpg"/>
-                    </div>
-                    <div class="iconsOfYourPost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                        <button class="iconButton"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="iconButton"><i class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="descrOfPost">
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo8.jpg"/>
-                    </div>
-                    <div class="iconsOfThePost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                    </div>
-                    <div class="descrOfPost">
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo9.jpg"/>
-                    </div>
-                    <div class="iconsOfThePost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                    </div>
-                    <div class="descrOfPost">
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
-            <li class="post">
-                <article>
-                    <div class="photoOfPost">
-                        <img class="photo" src="image/photo10.jpg"/>
-                    </div>
-                    <div class="iconsOfYourPost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-down fa-lg"></i></button>
-                        <button class="iconButton"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="iconButton"><i class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="descrOfPost">
-                        <div class="likes">
-                            <p>100 likes</p>
-                        </div>
-                        <div class="date">
-                            <p>18.02.2018 9:55</p>
-                        </div>
-                        <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
-                    </div>
-                </article>
-            </li>
         </ul>
-    </main>
-    <div class="morePosts">
-        <button class="blackButton" id="loadMore">LOAD MORE</button>
-    </div>
-</div>
-<footer>
-    <ul class="pageInfo">
-        <li class="info">
-            <h5>Sliunkova Valeriya</h5>
-            <h5>Course 2 Group 2</h5>
-        </li>
-        <li class="info">
-            <h5>valerijaslu@gmail.com</h5>
-            <h5>16.02.2018</h5>
-        </li>
-        <li class="info">
-            <h5>LOTUS</h5>
-        </li>
-    </ul>
-</footer>
-</body>
+    </body>
 </html>
