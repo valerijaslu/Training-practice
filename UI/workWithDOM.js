@@ -38,18 +38,37 @@ window.dom = (function() {
         temp.getElementsByClassName('descrOfPost').item(0).getElementsByTagName('p').item(3).innerHTML = post.description;
         temp.getElementsByClassName('descrOfPost').item(0).getElementsByTagName('p').item(4).innerHTML = '#: ' + post.hashTags.toString();
         document.getElementById('posts').appendChild(temp);
-        var hasBeen = false;
-        var option = document.createElement('option');
-        option.value = post.author;
-        option.innerHTML = post.author;
+
+        // forming authors datalist fo filters
+        var hasBeenAuthor = false;
+        var optionAuthor = document.createElement('option');
+        optionAuthor.value = post.author;
+        optionAuthor.innerHTML = post.author;
         for(var i = 0; i < document.getElementById('name').childNodes.length; i++) {
             if (document.getElementById('name').childNodes.item(i).value === post.author) {
-                hasBeen = true;
+                hasBeenAuthor = true;
                 break;
             }
         }
-        if(!document.getElementById('name').childNodes.length || !hasBeen){
-            document.getElementById('name').appendChild(option);
+        if(!document.getElementById('name').childNodes.length || !hasBeenAuthor){
+            document.getElementById('name').appendChild(optionAuthor);
+        }
+
+        // forming hashtags datalist fo filters
+        for(var i = 0; i < post.hashTags.length; i++) {
+            var hasBeenHashtag = false;
+            var optionHashtag = document.createElement('option');
+            optionHashtag.value = post.hashTags[i];
+            optionHashtag.innerHTML = post.hashTags[i];
+            for(var j = 0; j < document.getElementById('hashtags').childNodes.length; j++) {
+                if (document.getElementById('hashtags').childNodes.item(j).value === post.hashTags[i]) {
+                    hasBeenHashtag = true;
+                    break;
+                }
+            }
+            if(!document.getElementById('hashtags').childNodes.length || !hasBeenHashtag){
+                document.getElementById('hashtags').appendChild(optionHashtag);
+            }
         }
     }
 
