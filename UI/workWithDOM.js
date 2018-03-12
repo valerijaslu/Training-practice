@@ -38,6 +38,19 @@ window.dom = (function() {
         temp.getElementsByClassName('descrOfPost').item(0).getElementsByTagName('p').item(3).innerHTML = post.description;
         temp.getElementsByClassName('descrOfPost').item(0).getElementsByTagName('p').item(4).innerHTML = '#: ' + post.hashTags.toString();
         document.getElementById('posts').appendChild(temp);
+        var hasBeen = false;
+        var option = document.createElement('option');
+        option.value = post.author;
+        option.innerHTML = post.author;
+        for(var i = 0; i < document.getElementById('name').childNodes.length; i++) {
+            if (document.getElementById('name').childNodes.item(i).value === post.author) {
+                hasBeen = true;
+                break;
+            }
+        }
+        if(!document.getElementById('name').childNodes.length || !hasBeen){
+            document.getElementById('name').appendChild(option);
+        }
     }
 
     function addPhotoPost(post){
