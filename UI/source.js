@@ -232,10 +232,10 @@
 
     //comparator
     function compareTo(a, b){
-        if(a.createdAt < b.createdAt){
+        if(a.createdAt > b.createdAt){
             return -1;
         }
-        if(a.createdAt > b.createdAt){
+        if(a.createdAt < b.createdAt){
             return 1;
         }
         else{
@@ -289,7 +289,18 @@
     function editPhotoPost(postID, object) {
         var post = getPhotoPost(postID);
         if(post != null && post.state === 'active'){
-            Object.assign(post, object);
+            if(object.description){
+                post.description = object.description;
+            }
+            if(object.photoLink){
+                post.photoLink = object.photoLink;
+            }
+            if(object.hashTags){
+                post.hashTags.splice(0, post.hashTags.length);
+                for(var i = 0; i < object.hashTags.length; i++){
+                    post.hashTags[i] = object.hashTags[i];
+                }
+            }
             return true;
         }
         return false;
@@ -299,8 +310,8 @@
     function getPhotoPosts(skip, top, filterConfig) {
         var toShow = photoPosts.filter(function (x) { return x.state !== 'deleted'; });
 
-        skip = (typeof skip !== 'undefined') ?  skip : 0;
-        top = (typeof top !== 'undefined') ?  top : 10;
+        skip = skip || 0;
+        top = top || 10;
 
         if(!filterConfig){
             toShow.sort(compareTo);
@@ -383,7 +394,7 @@ console.log(module.addPhotoPost({id:'22', description:'cool'}));
 console.log(module.getPhotoPost('21'));
 
 console.log('try to edit post with id=21');
-console.log(module.editPhotoPost('21', {id:'21', description:'good', createdAt:new Date ('2018-12-01T17:30:00'), photoLink:'image/photo5.jpeg'}));
+console.log(module.editPhotoPost('21', {id:'21', description:'good', createdAt:new Date ('2019-12-01T17:30:00'), photoLink:'image/photo5.jpg'}));
 
 console.log(module.getPhotoPost('21'));
 

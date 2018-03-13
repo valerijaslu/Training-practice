@@ -82,25 +82,41 @@
                         <img class="photo" src="image/photo2.jpg"/>
                     </div>
                     <div class="iconsOfThePost">
-                        <button class="iconButton"><i class="far fa-heart"></i></button>
-                        <button class="iconButton"><i class="fas fa-angle-up fa-lg"></i></button>
-                        <button style="display: none" class="iconButton"><i class="fas fa-pencil-alt"></i></button>
-                        <button style="display: none" class="iconButton"><i class="fas fa-trash"></i></button>
+                        <button id="toLike" class="iconButton"><i class="far fa-heart"></i></button>
+                        <button id="show" class="iconButton"><i class="fas fa-angle-up fa-lg"></i></button>
+                        <button id="edit" style="display: none" class="iconButton"><i class="fas fa-pencil-alt"></i></button>
+                        <button id="delete" style="display: none" class="iconButton"><i class="fas fa-trash"></i></button>
                     </div>
                     <div class="descrOfPost" id="visible">
                         <div class="likes">
-                            <p>100 likes</p>
+                            <p class="postLikes">100 likes</p>
                         </div>
                         <div class="date">
-                            <p>18.02.2018 9:55</p>
+                            <p class="postDate">18.02.2018 9:55</p>
                         </div>
                         <br>
-                        <p>Name</p>
-                        <p>Short description. . .</p>
-                        <p>#</p>
+                        <p class="name">Name</p>
+                        <p class="description">Short description. . .</p>
+                        <p class="hashTags">#</p>
                     </div>
                 </article>
             </li>
         </ul>
+
+    <!--edit modal window-->
+    <div id="editModal" class="modal">
+        <button class="whiteButton" id="close">X</button>
+        <button class="whiteButton">Upload photo</button>
+        <img src=""/>
+        <div class="descrModal">
+            <p class="nameModal">Name</p>
+            <p class="dateModal">18.02.2018 9:55</p>
+            <br>
+            <input class="shortDescrModal" placeholder="Short description" type="text">
+            <input class="hashTagsModal" placeholder="#" type="text">
+        </div>
+        <button class="blackButton">OK</button>
+    </div>
+
     </body>
 </html>
