@@ -1,5 +1,5 @@
 window.dom = (function() {
-    var user = 'Lexie';
+    var user = null;
 
     // forming authors datalist fo filters
     for(var k = 0; k < module.users.length; k++) {
@@ -239,6 +239,10 @@ window.dom = (function() {
         document.getElementById('nameModal').textContent = user;
         var now = new Date();
         document.getElementById('dateModal').textContent = now.getDate() + '.' + (now.getMonth() + 1) + '.' + now.getFullYear() + ' ' + now.getHours() + ':' + now.getMinutes();
+        document.getElementById('photoModal').src = "";
+        document.getElementById('shortDescrModal').value = "";
+        document.getElementById('hashTagsModal').value = "";
+        editModal.style.display = 'block';
         editModal.style.display = 'inline-block';
     });
 

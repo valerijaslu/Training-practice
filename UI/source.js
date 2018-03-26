@@ -266,6 +266,7 @@
     ];
 
     if(!localStorage.getItem('posts')){
+        localStorage.clear();
         localStorage.setItem('posts', JSON.stringify(posts));
     }
 
