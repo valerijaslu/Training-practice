@@ -3,36 +3,40 @@
     <head>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-
         <meta charset="UTF-8">
         <meta name="description" content="Photo sharing network">
         <meta name="keywords" content="Photo,people,create">
         <meta name="author" content="Sliunkova Valeriya">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         <script defer src="source.js"></script>
         <script defer src="workWithDOM.js"></script>
+        <script defer src="actionListeners.js"></script>
         <title>LOTUS</title>
     </head>
 
     <body>
         <header>
+
             <div class="logo">
                 <img class="logoImg" src="image/logo.jpg"/>
                 <h1 id="invisible">LOTUS</h1>
             </div>
+
             <div class="user">
                 <div class="userInfo">
                     <h3>User name</h3>
                     <nav class="navigation">
-                        <button class="whiteButton">LOG OUT</button>
-                        <button class="whiteButton">+</button>
+                        <button style="display: none" class="whiteButton" id="logOut">LOG OUT</button>
+                        <button style="display: none" class="whiteButton" id="sign">SIGN IN</button>
+                        <button style="display: none" class="whiteButton" id="addPost">+</button>
                     </nav>
                 </div>
             </div>
+
         </header>
 
         <div class="body">
+
             <div class="lotusInfo">
                 <div class="lotusPhrase">
                     <h3>LOTUS - all the splendor in the moment...</h3>
@@ -42,22 +46,25 @@
                 </div>
             </div>
 
+            <!--filters-->
             <section class="filters">
-                <input list="name" placeholder="Name" class="filterField">
+                <input list="name" placeholder="Name" class="filterField" id="authorFilter">
                 <datalist id="name"></datalist>
-                <input type=datetime-local placeholder="dd.mm.yy hh:mm" class="filterField">
-                <input list="hashtags" placeholder="#" class="filterField">
+                <input type=date placeholder="dd.mm.yy" class="filterField" id="dateFilter">
+                <input list="hashtags" placeholder="#" class="filterField" id="hashTagFilter">
                 <datalist id="hashtags"></datalist>
             </section>
 
+            <!--photo posts-->
             <main>
-                <ul class="feed" id = "posts">
-
-                </ul>
+                <ul class="feed" id = "posts"></ul>
             </main>
+
+            <!--load more button-->
             <div class="morePosts">
                 <button class="blackButton" id="loadMore">LOAD MORE</button>
             </div>
+
         </div>
 
         <footer>
@@ -75,19 +82,23 @@
                 </li>
             </ul>
         </footer>
+
+        <!--template post-->
         <ul style="display: none">
             <li class="post" style="display: none" id="template">
-                <article>
+                <article class="item" id="">
                     <div class="photoOfPost">
                         <img class="photo" src="image/photo2.jpg"/>
                     </div>
                     <div class="iconsOfThePost">
-                        <button id="toLike" class="iconButton"><i class="far fa-heart"></i></button>
-                        <button id="show" class="iconButton"><i class="fas fa-angle-up fa-lg"></i></button>
-                        <button id="edit" style="display: none" class="iconButton"><i class="fas fa-pencil-alt"></i></button>
-                        <button id="delete" style="display: none" class="iconButton"><i class="fas fa-trash"></i></button>
+                        <button style="display: none" class="iconButton unlike"><img class="icon unheart" src="image/unlikeIcon.png"/></button>
+                        <button style="display: none" class="iconButton like"><img class="icon heart" src="image/likeIcon.png"/></button>
+                        <button style="display: none" class="iconButton hideAngle"><img class="icon angleUp" src="image/angleUpIcon.png"/></button>
+                        <button style="display: inline-block" class="iconButton showAngle"><img class="icon angleDown" src="image/angleDownIcon.png"/></button>
+                        <button style="display: none" class="iconButton editPencil"><img class="icon pencil" src="image/editIcon.png"/></button>
+                        <button style="display: none" class="iconButton deleteTrash"><img class="icon trash" src="image/trashIcon.png"/></button>
                     </div>
-                    <div class="descrOfPost" id="visible">
+                    <div class="descrOfPost" style="display: none">
                         <div class="likes">
                             <p class="postLikes">100 likes</p>
                         </div>
@@ -103,20 +114,47 @@
             </li>
         </ul>
 
-    <!--edit modal window-->
-    <div id="editModal" class="modal">
-        <button class="whiteButton" id="close">X</button>
-        <button class="whiteButton">Upload photo</button>
-        <img src=""/>
-        <div class="descrModal">
-            <p class="nameModal">Name</p>
-            <p class="dateModal">18.02.2018 9:55</p>
-            <br>
-            <input class="shortDescrModal" placeholder="Short description" type="text">
-            <input class="hashTagsModal" placeholder="#" type="text">
+        <!--sign in modal window-->
+        <div id="signInModal" class="modal">
+            <div class="modalContent">
+                <div class="signLogo">
+                    <img class="alignLogo" src="image/logo.jpg"/>
+                </div>
+                <p id="signInPhrase">Sign in to create, discover and connect witn the community.</p>
+                <p style="display: none" id="wrongData">Wrong login or password! Try again</p>
+                <input type="text" placeholder="Login" class="filterField" id="login">
+                <input type="password" placeholder="Password" class="filterField" id="password">
+                <button class="blackButton" id="signIN">SIGN IN</button>
+            </div>
         </div>
-        <button class="blackButton">OK</button>
-    </div>
+
+        <!--edit modal window-->
+        <div id="editModal" class="modal">
+            <div class="modalContent">
+                <button class="whiteButton" id="close">X</button>
+                <input type="url" name="pic" accept="image/*" placeholder="Image url" id="imageURL">
+                <button class="whiteButton" id="upload">upload</button>
+                <img id="photoModal" src=""/>
+                <div id="descrModal">
+                    <p id="nameModal"></p>
+                    <p id="dateModal"></p>
+                    <br>
+                    <textarea id="shortDescrModal" class="descrArea" placeholder="Short description"></textarea>
+                    <textarea id="hashTagsModal" class="descrArea" placeholder="#"></textarea>
+                </div>
+                <button class="blackButton" id="okEdit">OK</button>
+            </div>
+        </div>
+
+        <!--delete modal window-->
+        <div id="deleteModal" class="modal">
+            <div class="modalContent">
+                <p class="deleteWarning">Are you sure you want to delete this post?</p>
+                <button class="blackButton" id="yesDelete">YES</button>
+                <button class="blackButton" id="noDelete">NO</button>
+            </div>
+        </div>
 
     </body>
+
 </html>
