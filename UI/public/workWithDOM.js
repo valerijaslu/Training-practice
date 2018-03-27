@@ -1,5 +1,12 @@
 window.dom = (function() {
-    var user = null;
+    var user = document.getElementById('userName').value;
+
+    if(localStorage.getItem('tempUser') === 'undefined'){
+        user = null;
+        localStorage.setItem('tempUser', JSON.stringify(user));
+    }
+
+    var tempUser = JSON.parse(localStorage.getItem('tempUser'));
 
     // forming authors datalist fo filters
     for(var k = 0; k < module.users.length; k++) {
@@ -17,7 +24,8 @@ window.dom = (function() {
     });
     var logOutBtn = document.getElementById('logOut');
     logOutBtn.addEventListener('click', function () {
-        user = null;
+        tempUser = null;
+        localStorage.setItem('tempUser', JSON.stringify(tempUser));
         getPhotoPosts();
     });
     var signINBtn = document.getElementById('signIN');
@@ -27,7 +35,8 @@ window.dom = (function() {
         var tempUser = {name: userName, password: userPassword};
         if(module.users.find(function (x) { return (x.name === userName && x.password === userPassword);})){
             document.getElementById('wrongData').style.display = 'none';
-            user = userName;
+            tempUser = userName;
+            localStorage.setItem('tempUser', JSON.stringify(tempUser));
             signInModal.style.display = 'none';
             getPhotoPosts();
         }
@@ -42,13 +51,18 @@ window.dom = (function() {
             posts.removeChild(posts.firstChild);
         }
 
-        document.getElementsByClassName('userInfo').item(0).getElementsByTagName('h3').item(0).innerHTML = user;
-        if(user){
+        tempUser = JSON.parse(localStorage.getItem('tempUser'));
+
+        if(tempUser){
+            document.getElementById('userName').textContent = tempUser;
+            document.getElementById('userName').style.display = 'inline-block';
             document.getElementById('logOut').style.display = 'inline-block';
             document.getElementById('sign').style.display = 'none';
             document.getElementById('addPost').style.display = 'inline-block';
         }
-        if(!user){
+        if(!tempUser){
+            document.getElementById('userName').textContent = '';
+            document.getElementById('userName').style.display = 'none';
             document.getElementById('logOut').style.display = 'none';
             document.getElementById('sign').style.display = 'inline-block';
             document.getElementById('addPost').style.display = 'none';
@@ -62,7 +76,7 @@ window.dom = (function() {
 
         // forming hashtags datalist fo filters
         for(var k = 0; k < module.photoPosts.length; k++) {
-            if (typeof module.photoPosts[k].hashTags !== 'undefined') {
+            if (module.photoPosts[k].state === 'active' && typeof module.photoPosts[k].hashTags !== 'undefined') {
                 for (var i = 0; i < module.photoPosts[k].hashTags.length; i++) {
                     var hasBeenHashtag = false;
                     var optionHashtag = document.createElement('option');
@@ -96,7 +110,7 @@ window.dom = (function() {
         temp.style.display = 'inline-block';
         temp.getElementsByClassName('item').item(0).id = post.id;
         temp.getElementsByClassName('photo').item(0).src = post.photoLink;
-        if(isLiked(user, post.id)){
+        if(isLiked(post.id)){
             temp.getElementsByClassName('like').item(0).style.display = 'inline-block';
             temp.getElementsByClassName('unlike').item(0).style.display = 'none';
         }
@@ -104,10 +118,10 @@ window.dom = (function() {
             temp.getElementsByClassName('unlike').item(0).style.display = 'inline-block';
             temp.getElementsByClassName('like').item(0).style.display = 'none';
         }
-        if(user == null){
+        if(tempUser == null){
             temp.getElementsByClassName('unlike').item(0).style.display = 'none';
         }
-        if(user === post.author) {
+        if(tempUser === post.author) {
             temp.getElementsByClassName('editPencil').item(0).style.display = 'inline-block';
             temp.getElementsByClassName('deleteTrash').item(0).style.display = 'inline-block';
         }
@@ -199,44 +213,42 @@ window.dom = (function() {
                 idToDelete = temp.getElementsByClassName('item').item(0).id;
                 deleteModal.style.display = 'block';
             }
-        })
+        });
         document.getElementById('posts').appendChild(temp);
     }
 
     //like post
     function like(postID) {
         var post = module.getPhotoPost(postID);
-        if(post.likes && post.likes.indexOf(user) === -1) {
-            post.likes.push(user);
+        if(post.likes && post.likes.indexOf(tempUser) === -1) {
+            post.likes.push(tempUser);
             document.getElementById(postID).getElementsByClassName('postLikes').item(0).textContent = (post.likes.length) + ' likes';
             module.saveChanges();
         }
         else{
-            post.likes.pop(user);
+            post.likes.pop(tempUser);
             document.getElementById(postID).getElementsByClassName('postLikes').item(0).textContent = (post.likes.length) + ' likes';
             module.saveChanges();
         }
     }
 
-    function isLiked(user, postID) {
+    function isLiked(postID) {
         var post = module.getPhotoPost(postID);
-        if(post.likes && post.likes.indexOf(user) === -1) {
-            return false;
-        }
-        return true;
+        return !(post.likes && post.likes.indexOf(tempUser) === -1);
+
     }
 
     //add post
     function addPhotoPost(post){
         module.addPhotoPost(post);
-        appendPost(post);
+        //appendPost(post);
         getPhotoPosts();
     }
 
     var addPostBtn = document.getElementById('addPost');
     addPostBtn.addEventListener('click', function () {
         editOrAdd = 'add';
-        document.getElementById('nameModal').textContent = user;
+        document.getElementById('nameModal').textContent = tempUser;
         var now = new Date();
         document.getElementById('dateModal').textContent = now.getDate() + '.' + (now.getMonth() + 1) + '.' + now.getFullYear() + ' ' + now.getHours() + ':' + now.getMinutes();
         document.getElementById('photoModal').src = "";
@@ -292,7 +304,7 @@ window.dom = (function() {
         if(editOrAdd === 'add'){
             addPhotoPost({id: (module.photoPosts.length + 1).toString(),
                 description: editDescr.value,
-                createdAt: new Date(),
+                createdAt: (new Date()).toDateString(),
                 author: document.getElementById('nameModal').innerText,
                 photoLink: editPhoto.src,
                 hashTags: editHashtags.value.split(','),
@@ -305,7 +317,7 @@ window.dom = (function() {
     //upload button
     var uploadBtn = document.getElementById('upload');
     var imgURL = document.getElementById('imageURL');
-    uploadBtn.addEventListener('click', function (event) {
+    uploadBtn.addEventListener('click', function () {
         document.getElementById('photoModal').src = imgURL.value;
     });
 
